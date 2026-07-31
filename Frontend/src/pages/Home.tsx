@@ -21,6 +21,7 @@ import {
 import { personalInfo } from '../data/portfolioData';
 import { CustomLoader } from '../components/CustomLoader';
 import { BrandMarquee } from '../components/BrandMarquee';
+import { Counter } from '../components/Counter';
 
 // Import all frame images dynamically using Vite's import.meta.glob
 const imageModules = import.meta.glob('../assets/videoimg/*.jpg', { eager: true, import: 'default' }) as Record<string, string>;
@@ -33,6 +34,141 @@ const imageUrls = Object.keys(imageModules)
     return numA - numB;
   })
   .map((key) => imageModules[key]);
+
+// ── Multilingual Greeting — cycles every 2.5s with smooth fade ────────────
+const GREETINGS = [
+  { text: "Hey,",       lang: "English",    color: "#ef4444" },
+  { text: "Hola,",      lang: "Español",    color: "#f97316" },
+  { text: "नमस्ते,",   lang: "हिन्दी",      color: "#fbbf24" },
+  { text: "Bonjour,",   lang: "Français",   color: "#34d399" },
+  { text: "こんにちは,", lang: "日本語",      color: "#60a5fa" },
+  { text: "مرحباً,",    lang: "العربية",    color: "#a78bfa" },
+  { text: "Ciao,",      lang: "Italiano",   color: "#f472b6" },
+  { text: "Hallo,",     lang: "Deutsch",    color: "#2dd4bf" },
+  { text: "안녕하세요,", lang: "한국어",      color: "#fb923c" },
+  { text: "Olá,",       lang: "Português",  color: "#4ade80" },
+  { text: "你好,",      lang: "中文",        color: "#f87171" },
+  { text: "Привет,",    lang: "Русский",    color: "#818cf8" },
+];
+
+const MultilingualGreeting: React.FC = () => {
+  const [idx, setIdx] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIdx((i) => (i + 1) % GREETINGS.length);
+        setVisible(true);
+      }, 350); // fade out then swap
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const { text, lang, color } = GREETINGS[idx];
+
+  return (
+    <div className="gsap-hero-label flex items-center gap-2 h-7">
+      <span
+        style={{
+          color,
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0px)' : 'translateY(-8px)',
+          transition: 'opacity 0.35s ease, transform 0.35s ease, color 0.2s ease',
+          display: 'inline-block',
+          fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)',
+          fontWeight: 700,
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          fontFamily: 'monospace',
+          textShadow: `0 0 20px ${color}60`,
+        }}
+      >
+        {text}
+      </span>
+      <span
+        style={{
+          opacity: visible ? 0.45 : 0,
+          transition: 'opacity 0.35s ease',
+          fontSize: '0.65rem',
+          color: '#71717a',
+          letterSpacing: '0.1em',
+          fontFamily: 'monospace',
+          textTransform: 'uppercase',
+          alignSelf: 'center',
+          paddingTop: '2px',
+        }}
+      >
+        {lang}
+      </span>
+    </div>
+  );
+};
+
+// ── Cycling Status Pill Badge ──────────────────────────────────────────────
+const BADGE_ITEMS = [
+  { role: "Full Stack & Automation Developer", tag: "Binary Boss",       tagColor: "#e4e4e7" },
+  { role: "Lead Developer & Architect",         tag: "Binary Boss",       tagColor: "#ef4444" },
+  { role: "15+ Production Websites Built",      tag: "1.5+ Yrs Exp",      tagColor: "#fb923c" },
+  { role: "10+ n8n Workflows Active",           tag: "Zero API Cost",     tagColor: "#34d399" },
+  { role: "BCA Computer Applications",         tag: "Kurukshetra Uni",   tagColor: "#60a5fa" },
+  { role: "Available for Freelance & Lead",    tag: "Open for Hire",     tagColor: "#4ade80" },
+];
+
+const CyclingStatusBadge: React.FC = () => {
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % BADGE_ITEMS.length);
+        setFade(true);
+      }, 300);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const current = BADGE_ITEMS[index];
+
+  return (
+    <div className="gsap-hero-badge inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/80 border border-red-500/50 text-xs font-mono mb-6 w-fit backdrop-blur-md shadow-[0_0_25px_rgba(239,68,68,0.25)] hover:border-red-400 transition-all duration-300 select-none">
+      <span className="relative flex h-2.5 w-2.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]"></span>
+      </span>
+      
+      <span className="h-4 overflow-hidden flex items-center min-w-[210px] sm:min-w-[260px]">
+        <span
+          className="text-red-400 font-bold tracking-tight inline-block transition-all duration-300 ease-out"
+          style={{
+            opacity: fade ? 1 : 0,
+            transform: fade ? 'translateY(0px)' : 'translateY(-6px)'
+          }}
+        >
+          {current.role}
+        </span>
+      </span>
+
+      <span className="text-zinc-600 font-light">|</span>
+
+      <span className="h-4 overflow-hidden flex items-center">
+        <span
+          className="font-medium tracking-wide inline-block transition-all duration-300 ease-out"
+          style={{
+            color: current.tagColor,
+            opacity: fade ? 1 : 0,
+            transform: fade ? 'translateY(0px)' : 'translateY(6px)'
+          }}
+        >
+          {current.tag}
+        </span>
+      </span>
+    </div>
+  );
+};
 
 export const Home = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -55,75 +191,118 @@ export const Home = () => {
     if (!loaded || !heroRef.current) return;
 
     const ctx = gsap.context(() => {
-      // 1. Entrance Animation (Left & Right Split Come-In)
+      // 1. Smooth Step-by-Step Staggered Entrance Animation (Ek Ek Karke Aayenge)
       const entranceTl = gsap.timeline({
         defaults: { ease: 'power3.out' },
+        onComplete: () => {
+          ScrollTrigger.refresh();
+        },
       });
 
       entranceTl
+        // Step 1: Badge comes down smoothly
         .fromTo(
           '.gsap-hero-badge',
-          { x: -70, y: -20, opacity: 0 },
-          { x: 0, y: 0, opacity: 1, duration: 0.9 }
+          { y: -30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 }
         )
+        // Step 2: "Hey, I'm a" label slides in from left
         .fromTo(
-          '.gsap-hero-left-content',
-          { x: -120, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
-          '-=0.5'
+          '.gsap-hero-label',
+          { x: -50, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.6 },
+          '-=0.3'
         )
+        // Step 3: Title lines "Sagar" then "Punia" slide up smoothly one by one
         .fromTo(
-          '.gsap-hero-right-content',
-          { x: 120, opacity: 0 },
-          { x: 0, opacity: 1, duration: 1.2, ease: 'power4.out' },
-          '-=0.9'
+          '.gsap-hero-title-line',
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.18, ease: 'power4.out' },
+          '-=0.3'
         )
+        // Step 4: Side pitch headline fades up
+        .fromTo(
+          '.gsap-hero-headline',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.7 },
+          '-=0.4'
+        )
+        // Step 5: Sub-paragraph description fades up
+        .fromTo(
+          '.gsap-hero-para',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6 },
+          '-=0.4'
+        )
+        // Step 6: CTA Buttons & Social Links stagger in smoothly
+        .fromTo(
+          '.gsap-hero-btn',
+          { scale: 0.88, y: 15, opacity: 0 },
+          { scale: 1, y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'back.out(1.7)' },
+          '-=0.3'
+        )
+        // Step 7: Stat cards stagger up one by one
         .fromTo(
           '.gsap-stat-card',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.08, duration: 0.8 },
-          '-=0.7'
+          { y: 40, opacity: 0, scale: 0.95 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.12, ease: 'power3.out' },
+          '-=0.3'
         );
 
       // 2. Directional Scroll & Reverse Scroll Scrubbing
       // Left elements slide OUT to Left on scroll down, slide back IN from Left on scroll up
-      gsap.to('.gsap-hero-left-content, .gsap-hero-badge', {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top+=20 top',
-          end: 'bottom-=100 top',
-          scrub: 1,
-        },
-        x: -180,
-        opacity: 0,
-        ease: 'none',
-      });
+      gsap.fromTo(
+        '.gsap-hero-left-content, .gsap-hero-badge',
+        { x: 0, opacity: 1 },
+        {
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom-=100 top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+          x: -150,
+          opacity: 0,
+          ease: 'none',
+        }
+      );
 
       // Right elements slide OUT to Right on scroll down, slide back IN from Right on scroll up
-      gsap.to('.gsap-hero-right-content', {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top+=20 top',
-          end: 'bottom-=100 top',
-          scrub: 1,
-        },
-        x: 180,
-        opacity: 0,
-        ease: 'none',
-      });
+      gsap.fromTo(
+        '.gsap-hero-right-content',
+        { x: 0, opacity: 1 },
+        {
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom-=100 top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+          x: 150,
+          opacity: 0,
+          ease: 'none',
+        }
+      );
 
       // Stat cards slide DOWN on scroll down, slide back UP on scroll up
-      gsap.to('.gsap-stat-card', {
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top+=100 top',
-          end: 'bottom-=50 top',
-          scrub: 1,
-        },
-        y: 80,
-        opacity: 0,
-        ease: 'none',
-      });
+      gsap.fromTo(
+        '.gsap-stat-card',
+        { y: 0, opacity: 1 },
+        {
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top+=50 top',
+            end: 'bottom-=50 top',
+            scrub: 0.5,
+            invalidateOnRefresh: true,
+          },
+          y: 60,
+          opacity: 0,
+          ease: 'none',
+        }
+      );
     }, heroRef);
 
     return () => ctx.revert();
@@ -444,28 +623,13 @@ export const Home = () => {
             <div className="gsap-hero-scroll-container w-full">
               
               {/* Top Status & Role Badge */}
-              <div className="gsap-hero-badge inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/60 border border-red-500/40 text-xs font-mono mb-6 w-fit backdrop-blur-md shadow-[0_0_20px_rgba(225,29,72,0.2)]">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-                <GsapTextSlide
-                  words={[
-                    "Full Stack & Automation Developer",
-                    "Lead Dev @ Binary Boss",
-                    "15+ Production Sites Built",
-                    "n8n Automation Architect"
-                  ]}
-                  className="text-red-400 font-bold"
-                />
-                <span className="text-zinc-600">|</span>
-                <span className="text-zinc-300">Binary Boss</span>
-              </div>
+              <CyclingStatusBadge />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end w-full">
                 
                 {/* Main Display Headline */}
                 <div className="gsap-hero-left-content lg:col-span-8 space-y-2">
-                  <span className="gsap-hero-label text-red-400 text-sm sm:text-base font-semibold tracking-widest block uppercase font-mono drop-shadow-md">
-                    Hey, I'm a
-                  </span>
+                  <MultilingualGreeting />
                   <h1 className="text-6xl sm:text-8xl md:text-[110px] font-sans font-black leading-[0.88] tracking-tighter text-white uppercase drop-shadow-[0_15px_35px_rgba(0,0,0,0.95)] overflow-hidden py-1">
                     <span className="gsap-hero-title-line block">Sagar</span>
                     <span className="gsap-hero-title-line block text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-100 to-red-400">Punia</span>
@@ -540,7 +704,7 @@ export const Home = () => {
                     className="gsap-stat-card p-5 rounded-2xl bg-[#0c0c0e]/85 border border-zinc-800/80 backdrop-blur-md shadow-2xl hover:border-red-500/50 hover:bg-[#121216] transition-all duration-300 group"
                   >
                     <div className="text-3xl sm:text-4xl font-black font-sans text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-orange-400 drop-shadow-md group-hover:scale-105 transition-transform origin-left">
-                      {stat.value}
+                      <Counter value={stat.value} />
                     </div>
                     <div className="text-xs text-zinc-300 font-medium tracking-wide mt-1">
                       {stat.label}
