@@ -112,13 +112,14 @@ export const Moon3D: React.FC = () => {
     // ── Drag interaction ───────────────────────────────────────────────────
     let dragging = false;
     let prev = { x: 0, y: 0 };
-    let targetY = 0, targetX = 0;
 
     const onDown = (e: MouseEvent) => { dragging = true; prev = { x: e.clientX, y: e.clientY }; };
     const onMove = (e: MouseEvent) => {
       if (!dragging) return;
-      targetY += (e.clientX - prev.x) * 0.005;
-      targetX += (e.clientY - prev.y) * 0.005;
+      const deltaY = (e.clientX - prev.x) * 0.006;
+      const deltaX = (e.clientY - prev.y) * 0.006;
+      moonMesh.rotation.y += deltaY;
+      moonMesh.rotation.x += deltaX;
       prev = { x: e.clientX, y: e.clientY };
     };
     const onUp = () => { dragging = false; };
@@ -131,8 +132,10 @@ export const Moon3D: React.FC = () => {
     const onTS = (e: TouchEvent) => { if (!e.touches[0]) return; dragging = true; prev = { x: e.touches[0].clientX, y: e.touches[0].clientY }; };
     const onTM = (e: TouchEvent) => {
       if (!dragging || !e.touches[0]) return;
-      targetY += (e.touches[0].clientX - prev.x) * 0.005;
-      targetX += (e.touches[0].clientY - prev.y) * 0.005;
+      const deltaY = (e.touches[0].clientX - prev.x) * 0.006;
+      const deltaX = (e.touches[0].clientY - prev.y) * 0.006;
+      moonMesh.rotation.y += deltaY;
+      moonMesh.rotation.x += deltaX;
       prev = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
     const onTE = () => { dragging = false; };
@@ -147,9 +150,12 @@ export const Moon3D: React.FC = () => {
     const animate = () => {
       animId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
-      moonMesh.rotation.y += 0.0025;
-      moonMesh.rotation.y += (targetY - moonMesh.rotation.y) * 0.06;
-      moonMesh.rotation.x += (targetX - moonMesh.rotation.x) * 0.06;
+
+      // Continuous smooth 3D moon auto-rotation
+      if (!dragging) {
+        moonMesh.rotation.y += 0.006;
+      }
+
       ring1.rotation.z = t * 0.035;
       ring2.rotation.z = -t * 0.06;
       renderer.render(scene, camera);

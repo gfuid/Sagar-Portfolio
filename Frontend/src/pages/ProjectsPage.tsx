@@ -11,6 +11,7 @@ import {
   Cpu
 } from 'lucide-react';
 import { clientWebsites } from '../data/portfolioData';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 interface ShowcaseProject {
   index: string;
@@ -23,6 +24,7 @@ interface ShowcaseProject {
   description: string;
   desktopImg: string;
   mobileImg: string;
+  liveUrl?: string;
 }
 
 export const ProjectsPage: React.FC = () => {
@@ -84,6 +86,20 @@ export const ProjectsPage: React.FC = () => {
     // --- FRONTEND PROJECTS (INCLUDES ALL CLIENT WEBSITES) ---
     {
       index: '<4>',
+      categoryKey: 'Frontend Projects',
+      title: 'Veda Group — Corporate Business Group Web Platform',
+      role: 'Frontend Architect',
+      roleColor: 'text-amber-400',
+      frontendStack: 'React.js, Tailwind CSS, JavaScript (ES6+)',
+      backendStack: 'Vite Production Build, SEO Engine, Mobile Responsive',
+      description:
+        'Engineered the official corporate web platform for Veda Group (vedagroup.co.in) featuring responsive company showcase, business verticals, strategic initiatives, and lead inquiry routing.',
+      desktopImg: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+      mobileImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
+      liveUrl: 'https://vedagroup.co.in/',
+    },
+    {
+      index: '<5>',
       categoryKey: 'Frontend Projects',
       title: 'Vedomin Life Sciences — Pharma Web Application',
       role: 'Frontend Web Developer',
@@ -310,61 +326,65 @@ export const ProjectsPage: React.FC = () => {
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-20">
         {filteredProjects.length > 0 ? (
           filteredProjects.map((project, idx) => (
-            <div
+            <ScrollReveal
               key={idx}
+              direction={idx % 2 === 0 ? 'left' : 'right'}
               className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-8 sm:p-12 rounded-[2.5rem] bg-[#0c0c0e] border border-zinc-800/90 shadow-2xl hover:border-red-500/40 transition-all duration-500"
             >
               {/* LEFT COLUMN: METADATA & DETAILED DESCRIPTION */}
               <div className="lg:col-span-6 space-y-6">
                 {/* Index Callout */}
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-4xl sm:text-5xl font-black text-zinc-600 tracking-tighter">
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-mono font-black text-red-500 tracking-wider">
                     {project.index}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-mono font-bold uppercase tracking-wider">
-                    {project.categoryKey}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h2 className="text-2xl sm:text-4xl font-display font-black text-white leading-tight tracking-tight">
-                  {project.title}
-                </h2>
-
-                {/* Role */}
-                <div className="space-y-1">
-                  <span className="text-xs font-mono text-zinc-300 uppercase tracking-widest block font-medium">
-                    Role
-                  </span>
-                  <span className={`text-base font-bold font-sans ${project.roleColor}`}>
+                  <span
+                    className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider uppercase border"
+                    style={{
+                      borderColor: `${project.roleColor}40`,
+                      backgroundColor: `${project.roleColor}10`,
+                      color: project.roleColor,
+                    }}
+                  >
                     {project.role}
                   </span>
                 </div>
 
-                {/* Tech Stack Breakdown */}
-                <div className="space-y-3 pt-2 text-xs font-mono">
-                  <div>
-                    <span className="text-zinc-300 uppercase tracking-wider block mb-1">
-                      Frontend Stack
-                    </span>
-                    <span className="text-white font-bold text-sm">
-                      {project.frontendStack}
-                    </span>
+                <div className="space-y-2">
+                  <h3 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-zinc-300 leading-relaxed font-sans">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Tech Stack Specs */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono">
+                  <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 space-y-1">
+                    <span className="text-zinc-500 uppercase tracking-widest text-[10px] block">Frontend Architecture</span>
+                    <span className="text-zinc-200 font-semibold">{project.frontendStack}</span>
                   </div>
-                  <div>
-                    <span className="text-zinc-300 uppercase tracking-wider block mb-1">
-                      Backend & APIs
-                    </span>
-                    <span className="text-white font-bold text-sm">
-                      {project.backendStack}
-                    </span>
+                  <div className="p-3 rounded-xl bg-zinc-950 border border-zinc-800 space-y-1">
+                    <span className="text-zinc-500 uppercase tracking-widest text-[10px] block">Backend & Systems</span>
+                    <span className="text-zinc-200 font-semibold">{project.backendStack}</span>
                   </div>
                 </div>
 
-                {/* Paragraph Description */}
-                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-light pt-2">
-                  {project.description}
-                </p>
+                {/* Optional Live URL Button */}
+                {project.liveUrl && (
+                  <div className="pt-2">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white font-mono text-xs font-bold hover:scale-105 transition shadow-lg shadow-red-500/25 cursor-pointer"
+                    >
+                      <span>Visit Live Website</span>
+                      <span className="text-sm">↗</span>
+                    </a>
+                  </div>
+                )}
               </div>
 
               {/* RIGHT COLUMN: DUAL DEVICE MOCKUP SHOWCASE (LAPTOP & MOBILE FRAMES) */}
@@ -401,7 +421,7 @@ export const ProjectsPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))
         ) : (
           <div className="p-12 text-center text-zinc-500 font-mono text-sm">
@@ -417,24 +437,38 @@ export const ProjectsPage: React.FC = () => {
             <Globe className="w-5 h-5" /> Quick Client Web Directory
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {clientWebsites.map((site, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800 flex items-center justify-between gap-3 hover:border-red-500/50 transition-colors"
-              >
-                <div>
-                  <h4 className="text-sm font-heading font-bold text-white flex items-center gap-1.5">
-                    <span>{site.name}</span>
-                  </h4>
-                  <p className="text-[11px] font-mono text-zinc-400">{site.type}</p>
+            {clientWebsites.map((site, idx) => {
+              const Content = (
+                <div className="p-4 rounded-2xl bg-zinc-900/70 border border-zinc-800 flex items-center justify-between gap-3 hover:border-red-500/50 transition-colors w-full h-full">
+                  <div>
+                    <h4 className="text-sm font-heading font-bold text-white flex items-center gap-1.5">
+                      <span>{site.name}</span>
+                      {site.liveUrl && <span className="text-red-400 text-xs">↗</span>}
+                    </h4>
+                    <p className="text-[11px] font-mono text-zinc-400">{site.type}</p>
+                  </div>
+                  {site.tech && (
+                    <span className="px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px] font-mono text-emerald-400 shrink-0">
+                      {site.tech}
+                    </span>
+                  )}
                 </div>
-                {site.tech && (
-                  <span className="px-2.5 py-1 rounded-lg bg-zinc-950 border border-zinc-800 text-[10px] font-mono text-emerald-400 shrink-0">
-                    {site.tech}
-                  </span>
-                )}
-              </div>
-            ))}
+              );
+
+              return site.liveUrl ? (
+                <a
+                  key={idx}
+                  href={site.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:scale-[1.02] transition-transform"
+                >
+                  {Content}
+                </a>
+              ) : (
+                <div key={idx}>{Content}</div>
+              );
+            })}
           </div>
         </section>
       )}

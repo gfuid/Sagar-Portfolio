@@ -22,6 +22,7 @@ import { personalInfo } from '../data/portfolioData';
 import { CustomLoader } from '../components/CustomLoader';
 import { BrandMarquee } from '../components/BrandMarquee';
 import { Counter } from '../components/Counter';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 // Import all frame images dynamically using Vite's import.meta.glob
 const imageModules = import.meta.glob('../assets/videoimg/*.jpg', { eager: true, import: 'default' }) as Record<string, string>;
@@ -108,8 +109,8 @@ const MultilingualGreeting: React.FC = () => {
 
 // ── Cycling Status Pill Badge ──────────────────────────────────────────────
 const BADGE_ITEMS = [
-  { role: "Full Stack & Automation Developer", tag: "Binary Boss",       tagColor: "#e4e4e7" },
-  { role: "Lead Developer & Architect",         tag: "Binary Boss",       tagColor: "#ef4444" },
+  { role: "Full Stack & Automation Developer", tag: "Sagar Punia",       tagColor: "#e4e4e7" },
+  { role: "Lead Developer & Architect",         tag: "Production Ready",  tagColor: "#ef4444" },
   { role: "15+ Production Websites Built",      tag: "1.5+ Yrs Exp",      tagColor: "#fb923c" },
   { role: "10+ n8n Workflows Active",           tag: "Zero API Cost",     tagColor: "#34d399" },
   { role: "BCA Computer Applications",         tag: "Kurukshetra Uni",   tagColor: "#60a5fa" },
@@ -185,6 +186,7 @@ export const Home = () => {
   const scrollFractionRef = useRef(0);
   const currentFractionRef = useRef(0);
   const heroRef = useRef<HTMLDivElement>(null);
+  const portalsRef = useRef<HTMLDivElement>(null);
 
   // GSAP entrance & scroll-trigger directional animation (Left/Right split)
   useEffect(() => {
@@ -259,7 +261,7 @@ export const Home = () => {
             trigger: heroRef.current,
             start: 'top top',
             end: 'bottom-=100 top',
-            scrub: 0.5,
+            scrub: 1.2,
             invalidateOnRefresh: true,
           },
           x: -150,
@@ -277,7 +279,7 @@ export const Home = () => {
             trigger: heroRef.current,
             start: 'top top',
             end: 'bottom-=100 top',
-            scrub: 0.5,
+            scrub: 1.2,
             invalidateOnRefresh: true,
           },
           x: 150,
@@ -286,24 +288,126 @@ export const Home = () => {
         }
       );
 
-      // Stat cards slide DOWN on scroll down, slide back UP on scroll up
+      // Left stat cards slide OUT to Left on scroll down, slide back IN from Left on scroll up
       gsap.fromTo(
-        '.gsap-stat-card',
-        { y: 0, opacity: 1 },
+        '.gsap-stat-card-left',
+        { x: 0, opacity: 1 },
         {
           scrollTrigger: {
             trigger: heroRef.current,
-            start: 'top+=50 top',
-            end: 'bottom-=50 top',
-            scrub: 0.5,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 2.5,
             invalidateOnRefresh: true,
           },
-          y: 60,
+          x: -200,
           opacity: 0,
-          ease: 'none',
+          ease: 'power2.inOut',
+        }
+      );
+
+      // Right stat cards slide OUT to Right on scroll down, slide back IN from Right on scroll up
+      gsap.fromTo(
+        '.gsap-stat-card-right',
+        { x: 0, opacity: 1 },
+        {
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 2.5,
+            invalidateOnRefresh: true,
+          },
+          x: 200,
+          opacity: 0,
+          ease: 'power2.inOut',
         }
       );
     }, heroRef);
+
+    return () => ctx.revert();
+  }, [loaded]);
+
+  // GSAP ScrollTrigger for Section 5 (Explore Pages) & Section 6 (Contact Touchpoint)
+  useEffect(() => {
+    if (!loaded || !portalsRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Header fade & down — buttery smooth
+      gsap.fromTo(
+        '.gsap-portals-header',
+        { y: -30, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: portalsRef.current,
+            start: 'top 90%',
+            end: 'top 40%',
+            scrub: 1.5,
+          },
+          y: 0,
+          opacity: 1,
+          ease: 'power2.inOut',
+        }
+      );
+
+      // 2. Left Cards — smooth reverse scrub from left
+      gsap.fromTo(
+        '.gsap-portal-card-left',
+        { x: -200, opacity: 0, scale: 0.95 },
+        {
+          scrollTrigger: {
+            trigger: portalsRef.current,
+            start: 'top 85%',
+            end: 'top 10%',
+            scrub: 2.5,
+            invalidateOnRefresh: true,
+          },
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          stagger: 0.15,
+          ease: 'power2.inOut',
+        }
+      );
+
+      // 3. Right Cards — smooth reverse scrub from right
+      gsap.fromTo(
+        '.gsap-portal-card-right',
+        { x: 200, opacity: 0, scale: 0.95 },
+        {
+          scrollTrigger: {
+            trigger: portalsRef.current,
+            start: 'top 85%',
+            end: 'top 10%',
+            scrub: 2.5,
+            invalidateOnRefresh: true,
+          },
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          stagger: 0.15,
+          ease: 'power2.inOut',
+        }
+      );
+
+      // 4. Contact Touchpoint — smooth rise from bottom
+      gsap.fromTo(
+        '.gsap-contact-touchpoint',
+        { y: 50, scale: 0.96, opacity: 0 },
+        {
+          scrollTrigger: {
+            trigger: '.gsap-contact-touchpoint',
+            start: 'top 92%',
+            end: 'top 50%',
+            scrub: 1.5,
+          },
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          ease: 'power2.inOut',
+        }
+      );
+    }, portalsRef);
 
     return () => ctx.revert();
   }, [loaded]);
@@ -414,7 +518,7 @@ export const Home = () => {
 
     const render = () => {
       if (loaded && loadedImages.length > 0) {
-        const lerpFactor = 0.1;
+        const lerpFactor = 0.06;
         const diff = scrollFractionRef.current - currentFractionRef.current;
         
         if (Math.abs(diff) > 0.0001) {
@@ -701,7 +805,7 @@ export const Home = () => {
                 {personalInfo.summaryStats.slice(0, 4).map((stat, i) => (
                   <div
                     key={i}
-                    className="gsap-stat-card p-5 rounded-2xl bg-[#0c0c0e]/85 border border-zinc-800/80 backdrop-blur-md shadow-2xl hover:border-red-500/50 hover:bg-[#121216] transition-all duration-300 group"
+                    className={`gsap-stat-card ${i < 2 ? 'gsap-stat-card-left' : 'gsap-stat-card-right'} p-5 rounded-2xl bg-[#0c0c0e]/85 border border-zinc-800/80 backdrop-blur-md shadow-2xl hover:border-red-500/50 hover:bg-[#121216] transition-all duration-300 group`}
                   >
                     <div className="text-3xl sm:text-4xl font-black font-sans text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-orange-400 drop-shadow-md group-hover:scale-105 transition-transform origin-left">
                       <Counter value={stat.value} />
@@ -731,7 +835,7 @@ export const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
               
               {/* Left Column */}
-              <div className="lg:col-span-5 flex flex-col gap-5">
+              <ScrollReveal direction="left" className="lg:col-span-5 flex flex-col gap-5">
                 <span className="text-orange-400 text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2">
                   <Layers className="w-4 h-4" /> Interactive Showcase
                 </span>
@@ -766,10 +870,10 @@ export const Home = () => {
                     <span>About Me</span>
                   </Link>
                 </div>
-              </div>
+              </ScrollReveal>
 
               {/* Right Column: 3D Stacked Cards Animation */}
-              <div className="lg:col-span-7 flex justify-center items-center">
+              <ScrollReveal direction="right" className="lg:col-span-7 flex justify-center items-center">
                 <div 
                   className="relative w-full h-[520px] flex items-center justify-center cursor-pointer select-none"
                   style={{ perspective: '1200px' }}
@@ -796,71 +900,151 @@ export const Home = () => {
                     ))}
                   </div>
                 </div>
+              </ScrollReveal>
+
+            </div>
+          </section>
+
+          {/* Section 5: Transparent Interactive Portals with Directional GSAP Scroll Animations */}
+          <section ref={portalsRef} className="py-24 px-6 md:px-16 max-w-7xl mx-auto space-y-12">
+            <div className="gsap-portals-header text-center max-w-2xl mx-auto space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-orange-500/40 text-orange-400 font-mono text-[11px] font-bold uppercase tracking-widest backdrop-blur-md shadow-[0_0_20px_rgba(249,115,22,0.2)]">
+                <Layers className="w-3.5 h-3.5 text-orange-400" />
+                <span>Explore Portfolio Pages</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
+                Detailed Work & <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400">Capabilities</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-zinc-200 max-w-lg mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                Explore dedicated sections for full career bio, production project showcases, experience timeline, and automation systems.
+              </p>
+            </div>
+
+            {/* Split layout: Left cards | Right cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+              
+              {/* Left Column: 2 Cards */}
+              <div className="space-y-6">
+                {/* Card 1 */}
+                <Link 
+                  to="/about" 
+                  className="gsap-portal-card-left relative group p-6 rounded-2xl bg-black/20 hover:bg-black/45 backdrop-blur-xs border border-white/20 hover:border-orange-400/80 transition-all duration-500 ease-out shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden block"
+                >
+                  <div className="absolute -top-10 -right-10 w-28 h-28 bg-orange-500/15 rounded-full blur-2xl group-hover:bg-orange-500/30 transition-all duration-500 pointer-events-none" />
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-orange-500/40 text-orange-400 w-fit mb-4 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-black transition-all duration-300 shadow-md">
+                      <Code2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-heading font-bold text-white mb-2 group-hover:text-orange-400 transition-colors drop-shadow-md">
+                      About Sagar
+                    </h3>
+                    <p className="text-xs text-zinc-200 leading-relaxed mb-6 font-normal drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      Bio, Kurukshetra University BCA, ADCA diploma & complete skills matrix.
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-orange-400 font-mono font-bold group-hover:text-orange-300">
+                    <span>Read Bio</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </div>
+                </Link>
+
+                {/* Card 2 */}
+                <Link 
+                  to="/projects" 
+                  className="gsap-portal-card-left relative group p-6 rounded-2xl bg-black/20 hover:bg-black/45 backdrop-blur-xs border border-white/20 hover:border-amber-400/80 transition-all duration-500 ease-out shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden block"
+                >
+                  <div className="absolute -top-10 -right-10 w-28 h-28 bg-amber-500/15 rounded-full blur-2xl group-hover:bg-amber-500/30 transition-all duration-500 pointer-events-none" />
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-amber-500/40 text-amber-400 w-fit mb-4 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300 shadow-md">
+                      <Globe className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-heading font-bold text-white mb-2 group-hover:text-amber-400 transition-colors drop-shadow-md">
+                      Projects Showcase
+                    </h3>
+                    <p className="text-xs text-zinc-200 leading-relaxed mb-6 font-normal drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      GymFlow SaaS, TRIREME Marketplace, 3 Mobile Apps & 15+ Live Sites.
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-amber-400 font-mono font-bold group-hover:text-amber-300">
+                    <span>View Projects</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </div>
+                </Link>
+              </div>
+
+              {/* Right Column: 2 Cards */}
+              <div className="space-y-6">
+                {/* Card 3 */}
+                <Link 
+                  to="/experience" 
+                  className="gsap-portal-card-right relative group p-6 rounded-2xl bg-black/20 hover:bg-black/45 backdrop-blur-xs border border-white/20 hover:border-emerald-400/80 transition-all duration-500 ease-out shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden block"
+                >
+                  <div className="absolute -top-10 -right-10 w-28 h-28 bg-emerald-500/15 rounded-full blur-2xl group-hover:bg-emerald-500/30 transition-all duration-500 pointer-events-none" />
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-emerald-500/40 text-emerald-400 w-fit mb-4 group-hover:scale-110 group-hover:bg-emerald-400 group-hover:text-black transition-all duration-300 shadow-md">
+                      <Briefcase className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-heading font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors drop-shadow-md">
+                      Experience
+                    </h3>
+                    <p className="text-xs text-zinc-200 leading-relaxed mb-6 font-normal drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      Trireme Life Science, InnovationSoch, CodeQuotient & Event Leadership.
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-emerald-400 font-mono font-bold group-hover:text-emerald-300">
+                    <span>View Timeline</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </div>
+                </Link>
+
+                {/* Card 4 */}
+                <Link 
+                  to="/automation" 
+                  className="gsap-portal-card-right relative group p-6 rounded-2xl bg-black/20 hover:bg-black/45 backdrop-blur-xs border border-white/20 hover:border-cyan-400/80 transition-all duration-500 ease-out shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden block"
+                >
+                  <div className="absolute -top-10 -right-10 w-28 h-28 bg-cyan-500/15 rounded-full blur-2xl group-hover:bg-cyan-500/30 transition-all duration-500 pointer-events-none" />
+                  <div>
+                    <div className="p-3.5 rounded-xl bg-black/40 border border-cyan-500/40 text-cyan-400 w-fit mb-4 group-hover:scale-110 group-hover:bg-cyan-400 group-hover:text-black transition-all duration-300 shadow-md">
+                      <Cpu className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-heading font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors drop-shadow-md">
+                      Automation Engine
+                    </h3>
+                    <p className="text-xs text-zinc-200 leading-relaxed mb-6 font-normal drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                      10+ n8n Workflows, WebJS WhatsApp Bot & IndiaMART B2B optimization.
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-cyan-400 font-mono font-bold group-hover:text-cyan-300">
+                    <span>See Automation</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                  </div>
+                </Link>
               </div>
 
             </div>
           </section>
 
-          {/* Section 5: Translucent Separate Page Portals Teaser */}
-          <section className="py-20 px-6 md:px-16 max-w-7xl mx-auto space-y-10">
-            <div className="text-center max-w-xl mx-auto space-y-2">
-              <span className="text-orange-400 font-mono text-xs font-bold uppercase tracking-widest">Explore Portfolio Pages</span>
-              <h2 className="text-3xl font-display font-extrabold text-white drop-shadow-md">Detailed Work & Capabilities</h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              
-              <Link to="/about" className="p-6 rounded-2xl bg-black/30 border border-white/20 hover:border-orange-500/60 hover:bg-black/50 transition group">
-                <Code2 className="w-8 h-8 text-orange-400 mb-3 group-hover:scale-110 transition" />
-                <h3 className="text-lg font-display font-bold text-white mb-1">About Sagar</h3>
-                <p className="text-xs text-zinc-300 leading-relaxed mb-3">Bio, Kurukshetra University BCA, ADCA diploma & complete skills matrix.</p>
-                <span className="text-xs text-orange-400 font-mono font-bold inline-flex items-center gap-1">Read Bio →</span>
-              </Link>
-
-              <Link to="/projects" className="p-6 rounded-2xl bg-black/30 border border-white/20 hover:border-orange-500/60 hover:bg-black/50 transition group">
-                <Globe className="w-8 h-8 text-amber-400 mb-3 group-hover:scale-110 transition" />
-                <h3 className="text-lg font-display font-bold text-white mb-1">Projects Showcase</h3>
-                <p className="text-xs text-zinc-300 leading-relaxed mb-3">GymFlow SaaS, TRIREME Marketplace, 3 Mobile Apps & 15+ Live Sites.</p>
-                <span className="text-xs text-amber-400 font-mono font-bold inline-flex items-center gap-1">View Projects →</span>
-              </Link>
-
-              <Link to="/experience" className="p-6 rounded-2xl bg-black/30 border border-white/20 hover:border-orange-500/60 hover:bg-black/50 transition group">
-                <Briefcase className="w-8 h-8 text-emerald-400 mb-3 group-hover:scale-110 transition" />
-                <h3 className="text-lg font-display font-bold text-white mb-1">Experience</h3>
-                <p className="text-xs text-zinc-300 leading-relaxed mb-3">Trireme Life Science, InnovationSoch, CodeQuotient & Event Leadership.</p>
-                <span className="text-xs text-emerald-400 font-mono font-bold inline-flex items-center gap-1">View Timeline →</span>
-              </Link>
-
-              <Link to="/automation" className="p-6 rounded-2xl bg-black/30 border border-white/20 hover:border-orange-500/60 hover:bg-black/50 transition group">
-                <Cpu className="w-8 h-8 text-cyan-400 mb-3 group-hover:scale-110 transition" />
-                <h3 className="text-lg font-display font-bold text-white mb-1">Automation Engine</h3>
-                <p className="text-xs text-zinc-300 leading-relaxed mb-3">10+ n8n Workflows, WebJS WhatsApp Bot & IndiaMART B2B optimization.</p>
-                <span className="text-xs text-cyan-400 font-mono font-bold inline-flex items-center gap-1">See Automation →</span>
-              </Link>
-
-            </div>
-          </section>
-
-          {/* Section 6: Translucent Direct Contact Touchpoint */}
+          {/* Section 6: Transparent Direct Contact Touchpoint */}
           <section className="py-16 px-6 md:px-16 max-w-7xl mx-auto">
-            <div className="p-8 md:p-12 rounded-3xl bg-black/40 border border-white/20 shadow-2xl">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="gsap-contact-touchpoint relative p-8 md:p-12 rounded-3xl bg-black/40 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)] overflow-hidden">
+              <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                 
                 <div className="lg:col-span-7 space-y-3">
-                  <span className="text-orange-400 text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2">
+                  <span className="text-orange-400 text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-2 drop-shadow-sm">
                     <Mail className="w-4 h-4" /> Get In Touch
                   </span>
-                  <h2 className="text-3xl font-display font-extrabold text-white drop-shadow-md">Have a Project or Role Requirement?</h2>
-                  <p className="text-xs text-zinc-200 leading-relaxed">
+                  <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white drop-shadow-md">Have a Project or Role Requirement?</h2>
+                  <p className="text-xs text-zinc-200 leading-relaxed drop-shadow-sm">
                     Available for full-time roles, full-stack web platforms, React Native mobile apps, and custom n8n automation workflows.
                   </p>
                 </div>
 
                 <div className="lg:col-span-5 flex flex-wrap items-center gap-3 lg:justify-end">
-                  <Link to="/contact" className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-heading font-bold text-xs hover:scale-105 transition">
+                  <Link to="/contact" className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-black font-heading font-bold text-xs hover:scale-105 transition shadow-lg shadow-orange-500/25">
                     Contact Form
                   </Link>
-                  <a href={`tel:${personalInfo.phone}`} className="px-5 py-3 rounded-full bg-black/50 border border-white/20 text-white font-mono text-xs hover:bg-black/70 transition">
+                  <a href={`tel:${personalInfo.phone}`} className="px-5 py-3 rounded-full bg-black/60 border border-white/20 text-white font-mono text-xs hover:border-orange-400 hover:bg-black/80 transition backdrop-blur-md">
                     Call {personalInfo.phone}
                   </a>
                 </div>

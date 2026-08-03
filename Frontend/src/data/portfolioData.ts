@@ -21,6 +21,7 @@ export interface ClientWebsite {
   name: string;
   type: string;
   tech?: string;
+  liveUrl?: string;
 }
 
 export interface AutomationWorkflow {
@@ -202,6 +203,7 @@ export const webProjects: WebProject[] = [
 ];
 
 export const clientWebsites: ClientWebsite[] = [
+  { name: "Veda Group", type: "Corporate / Business Group Portal", tech: "React + Tailwind", liveUrl: "https://vedagroup.co.in/" },
   { name: "Vedomin Life Sciences", type: "Pharma Business Website", tech: "React + Tailwind" },
   { name: "Holistic Jeevandhara Foundation", type: "NGO / Foundation Portal", tech: "React.js" },
   { name: "VedAgro Group", type: "Fuel Import/Export Portal", tech: "React + Node" },

@@ -93,25 +93,25 @@ export const GithubContributionsCard: React.FC = () => {
         setIsMouseOver(false);
         setHoveredSquare(null);
       }}
-      className="relative w-full max-w-xl mx-auto p-6 sm:p-8 rounded-[2rem] bg-white text-zinc-950 shadow-2xl border border-zinc-200 transition-all duration-300 hover:shadow-emerald-500/10 select-none"
+      className="relative w-full max-w-xl mx-auto p-6 sm:p-8 rounded-[2.5rem] bg-gradient-to-b from-zinc-900 via-zinc-900/90 to-zinc-950 text-white shadow-2xl border border-zinc-800/90 transition-all duration-500 hover:border-emerald-500/50 select-none"
     >
-      {/* Top Header Row matching Image 2 */}
-      <div className="flex items-center justify-between mb-6">
+      {/* Top Header Row */}
+      <div className="flex items-center justify-between mb-6 border-b border-zinc-800/80 pb-4">
         <div>
           <div className="flex items-center gap-2">
             <h4 className="text-xs font-mono font-bold tracking-widest text-zinc-400 uppercase">
-              GITHUB contributions
+              GITHUB CONTRIBUTIONS
             </h4>
-            <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full animate-pulse">
+            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" /> AUTO SCANNING
             </span>
           </div>
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-xl sm:text-2xl font-black font-sans text-zinc-900">
+          <div className="flex items-center gap-3 mt-1.5">
+            <span className="text-2xl sm:text-3xl font-black font-heading text-white">
               748+ Commits
             </span>
-            <span className="flex items-center gap-1 text-[11px] font-mono font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">
-              <Flame className="w-3 h-3 fill-emerald-600" /> 14 Day Streak
+            <span className="flex items-center gap-1 text-xs font-mono font-bold text-emerald-300 bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 rounded-full shadow-lg shadow-emerald-500/20">
+              <Flame className="w-3.5 h-3.5 fill-orange-400 text-orange-400 animate-bounce" /> 14 Day Streak
             </span>
           </div>
         </div>
@@ -120,7 +120,7 @@ export const GithubContributionsCard: React.FC = () => {
           href="https://github.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2.5 rounded-2xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 transition-colors"
+          className="p-3 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white border border-zinc-800 transition-colors shadow-lg"
           aria-label="GitHub Profile"
         >
           <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -129,12 +129,12 @@ export const GithubContributionsCard: React.FC = () => {
         </a>
       </div>
 
-      {/* AUTO-SCROLLING HEATMAP GRID ("auto chle") */}
+      {/* AUTO-SCROLLING HEATMAP GRID (NO VISIBLE SCROLLBAR ON ANY BROWSER) */}
       <div
         ref={scrollContainerRef}
-        className="relative overflow-x-auto pb-2 no-scrollbar scroll-smooth"
+        className="relative overflow-x-auto pb-1 scroll-smooth [&&::-webkit-scrollbar]:hidden [ms-overflow-style:none] [scrollbar-width:none]"
       >
-        <div className="grid grid-flow-col grid-rows-7 gap-1.5 min-w-[520px]">
+        <div className="grid grid-flow-col grid-rows-7 gap-1.5 min-w-[540px]">
           {grid.map((item, idx) => {
             const isCurrentActive = idx === activeIndex && !hoveredSquare;
             return (
@@ -154,17 +154,17 @@ export const GithubContributionsCard: React.FC = () => {
       </div>
 
       {/* DYNAMIC LIVE TOOLTIP & DATE LABELS */}
-      <div className="mt-4 pt-4 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-400">
+      <div className="mt-4 pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
         <span>May '24</span>
-        <div className="h-5 flex items-center">
+        <div className="h-6 flex items-center">
           {currentDisplay ? (
-            <span className="text-[11px] font-semibold text-zinc-900 flex items-center gap-1.5 animate-fade-in bg-zinc-100 px-3 py-1 rounded-full border border-zinc-200 shadow-xs">
-              <GitCommit className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="text-[11px] font-mono font-semibold text-emerald-300 flex items-center gap-2 bg-zinc-950 px-3.5 py-1 rounded-full border border-emerald-500/30 shadow-lg">
+              <GitCommit className="w-3.5 h-3.5 text-emerald-400 animate-spin" style={{ animationDuration: '3s' }} />
               <strong>{currentDisplay.count} contributions</strong> on{' '}
               {currentDisplay.date}
             </span>
           ) : (
-            <span className="text-[11px] text-zinc-400">
+            <span className="text-[11px] text-zinc-400 font-mono">
               Live contributions activity
             </span>
           )}

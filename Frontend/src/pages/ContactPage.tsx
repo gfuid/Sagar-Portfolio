@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { LinkedInIcon, GitHubIcon } from '../components/SocialIcons';
+import { Character3DModel } from '../components/Character3DModel';
 
 export const ContactPage: React.FC = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -43,19 +44,35 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-28 pb-20 bg-zinc-950 text-white selection:bg-orange-500 selection:text-black font-sans">
       
-      {/* Header Banner */}
+      {/* Header Banner with Real Interactive 3D WebGL Model */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
         <div className="p-8 sm:p-12 rounded-[2.5rem] bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-950 border border-zinc-800 relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <span className="text-orange-500 font-mono text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-              <Mail className="w-4 h-4" /> Start Conversation
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-display font-black text-white tracking-tight leading-tight">
-              Let's Connect & Build
-            </h1>
-            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
-              Have a web application, mobile app requirement, or automation workflow in mind? Reach out directly via email, phone, or the contact form below.
-            </p>
+          
+          {/* Floating decorative shapes */}
+          <div className="absolute top-6 right-[28%] w-4 h-4 rounded-full bg-red-500/60 animate-bounce" style={{ animationDuration: '3s' }} />
+          <div className="absolute bottom-8 right-[35%] w-3 h-3 rounded-sm bg-orange-600/40 rotate-45 animate-pulse" style={{ animationDuration: '4s' }} />
+          <div className="absolute top-[40%] left-[5%] w-2.5 h-2.5 rounded-full bg-pink-500/30 animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }} />
+
+          {/* Ambient glow behind avatar */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-red-600/10 via-transparent to-transparent pointer-events-none" />
+
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="max-w-xl space-y-4 relative z-10">
+              <span className="text-red-500 font-mono text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                <Mail className="w-4 h-4" /> Start Conversation
+              </span>
+              <h1 className="text-4xl sm:text-6xl font-display font-black text-white tracking-tight leading-tight">
+                Get in Touch.
+              </h1>
+              <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                Have a web application, mobile app requirement, or automation workflow in mind? Reach out directly — let's build something great together.
+              </p>
+            </div>
+
+            {/* Real Interactive 3D WebGL Character Model */}
+            <div className="w-full lg:w-[480px] shrink-0 relative">
+              <Character3DModel className="border border-zinc-800/80 bg-zinc-950/50 shadow-2xl" />
+            </div>
           </div>
         </div>
       </section>

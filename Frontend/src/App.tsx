@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import { SmoothScroll } from './components/SmoothScroll';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import InitialLoader from './components/InitialLoader';
@@ -63,7 +64,9 @@ export function App() {
     <BrowserRouter>
       {showLoader && <InitialLoader onComplete={() => setShowLoader(false)} />}
       <ScrollToTop />
-      <AppContent />
+      <SmoothScroll>
+        <AppContent />
+      </SmoothScroll>
     </BrowserRouter>
   );
 }
