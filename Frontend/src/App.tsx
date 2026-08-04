@@ -57,6 +57,29 @@ function AppContent() {
   );
 }
 
+function AppRouter() {
+  const location = useLocation();
+
+  const validRoutes = [
+    '/',
+    '/about',
+    '/projects',
+    '/experience',
+    '/automation',
+    '/achievements',
+    '/contact',
+  ];
+  if (!validRoutes.includes(location.pathname)) {
+    return <NotFoundPage />;
+  }
+
+  return (
+    <SmoothScroll>
+      <AppContent />
+    </SmoothScroll>
+  );
+}
+
 export function App() {
   const [showLoader, setShowLoader] = useState(true);
 
@@ -64,9 +87,7 @@ export function App() {
     <BrowserRouter>
       {showLoader && <InitialLoader onComplete={() => setShowLoader(false)} />}
       <ScrollToTop />
-      <SmoothScroll>
-        <AppContent />
-      </SmoothScroll>
+      <AppRouter />
     </BrowserRouter>
   );
 }

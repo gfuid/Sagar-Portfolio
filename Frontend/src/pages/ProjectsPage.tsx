@@ -329,7 +329,7 @@ export const ProjectsPage: React.FC = () => {
             <ScrollReveal
               key={idx}
               direction={idx % 2 === 0 ? 'left' : 'right'}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-8 sm:p-12 rounded-[2.5rem] bg-[#0c0c0e] border border-zinc-800/90 shadow-2xl hover:border-red-500/40 transition-all duration-500"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center p-5 sm:p-12 rounded-2xl sm:rounded-[2.5rem] bg-[#0c0c0e] border border-zinc-800/90 shadow-2xl hover:border-red-500/40 transition-all duration-500"
             >
               {/* LEFT COLUMN: METADATA & DETAILED DESCRIPTION */}
               <div className="lg:col-span-6 space-y-6">

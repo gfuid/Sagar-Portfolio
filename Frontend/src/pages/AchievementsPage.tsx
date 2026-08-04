@@ -13,9 +13,9 @@ import { achievements, education, certifications } from '../data/portfolioData';
 export const AchievementsPage: React.FC = () => {
   return (
     <div className="min-h-screen pt-28 pb-16 bg-zinc-950 text-white selection:bg-orange-500 selection:text-black">
-      
+
       {/* Header Banner */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12 pt-16 sm:pt-20">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-950 border border-zinc-800 relative overflow-hidden">
           <div className="max-w-3xl space-y-3">
             <span className="text-orange-500 font-mono text-xs font-bold uppercase tracking-widest flex items-center gap-2">
@@ -90,7 +90,7 @@ export const AchievementsPage: React.FC = () => {
       </section>
 
       {/* SECTION 3: CERTIFICATIONS */}
-      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 space-y-8">
+      <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 space-y-8 pb-20">
         <div className="flex items-center gap-2">
           <BookmarkCheck className="w-5 h-5 text-emerald-400" />
           <h2 className="text-2xl font-extrabold text-white">Professional Certifications</h2>
@@ -114,3 +114,5 @@ export const AchievementsPage: React.FC = () => {
     </div>
   );
 };
+
+export default AchievementsPage;

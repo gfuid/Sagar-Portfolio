@@ -94,7 +94,7 @@ const AnimatedHeading: React.FC = () => {
 
   return (
     <h1
-      className="text-6xl sm:text-7xl md:text-8xl font-sans tracking-tight leading-none cursor-default select-none"
+      className="text-4xl sm:text-7xl md:text-8xl font-sans tracking-tight leading-none cursor-default select-none"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -287,10 +287,10 @@ export const AboutPage: React.FC = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 to="/contact"
-                className="px-6 py-3.5 rounded-full bg-[#121318] border border-zinc-700 hover:border-orange-500 text-white font-mono text-xs hover:bg-orange-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer shadow-xl"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-full bg-[#121318] border border-zinc-700 hover:border-orange-500 text-white font-mono text-xs hover:bg-orange-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer shadow-xl"
               >
                 <span>Get In Touch</span>
                 <ArrowRight className="w-4 h-4" />
@@ -300,7 +300,7 @@ export const AboutPage: React.FC = () => {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full bg-black/80 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white hover:border-zinc-600 transition flex items-center gap-1.5"
+                className="w-full sm:w-auto justify-center px-5 py-3.5 rounded-full bg-black/80 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white hover:border-zinc-600 transition flex items-center gap-1.5"
               >
                 <span>GitHub Profile</span>
                 <ExternalLink className="w-3.5 h-3.5 text-orange-400" />
