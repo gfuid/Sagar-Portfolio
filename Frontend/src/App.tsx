@@ -5,6 +5,7 @@ import { SmoothScroll } from './components/SmoothScroll';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import InitialLoader from './components/InitialLoader';
+import { AnimatedCursor } from './components/AnimatedCursor';
 
 import { Home } from './pages/Home';
 import { AboutPage } from './pages/AboutPage';
@@ -85,6 +86,7 @@ export function App() {
 
   return (
     <BrowserRouter>
+      <AnimatedCursor />
       {showLoader && <InitialLoader onComplete={() => setShowLoader(false)} />}
       <ScrollToTop />
       <AppRouter />
