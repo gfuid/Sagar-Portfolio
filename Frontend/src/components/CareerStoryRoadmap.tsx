@@ -4,6 +4,7 @@ import triremeLogo from '../assets/brand/trireme.png';
 import travelTradeLogo from '../assets/brand/traveltrade.png';
 import cqstLogo from '../assets/brand/cqst.png';
 import innovationSochLogo from '../assets/brand/innovationsoch.png';
+import visawebsLogo from '../assets/brand/visawebs.png';
 
 interface TimelineEntry {
   year: string;
@@ -78,6 +79,18 @@ const timelineData: TimelineEntry[] = [
     achievement: '90% API Latency Reduction (500ms → 50ms)',
     tech: ['React', 'Node.js', 'MongoDB', 'Redis', 'JWT Auth'],
     accent: '#22c55e',
+  },
+  {
+    year: '2026 – Present',
+    role: 'Full Stack & Web Developer',
+    company: 'Visawebs',
+    type: 'Full-Time',
+    logo: visawebsLogo,
+    tagline: 'Global Platform',
+    description: 'Developing international education abroad & Irish immigration web applications. Engineered automated lead intake workflows and CRM pipelines connecting 500+ university partners.',
+    achievement: '500+ University Network & Ireland Immigration Portal',
+    tech: ['React.js', 'Node.js', 'Python', 'CRM Automation', 'SEO Engine'],
+    accent: '#06b6d4',
   },
   {
     year: 'Current',

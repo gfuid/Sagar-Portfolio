@@ -48,8 +48,10 @@ import triremeLogo from '../assets/brand/trireme.png';
 import travelTradeLogo from '../assets/brand/traveltrade.png';
 import cqstLogo from '../assets/brand/cqst.png';
 import innovationSochLogo from '../assets/brand/innovationsoch.png';
+import visawebsLogo from '../assets/brand/visawebs.png';
 
 const companyLogos: Record<string, string> = {
+  'Visawebs': visawebsLogo,
   'Trireme Life Science': triremeLogo,
   'Travel Trade (Freelance)': travelTradeLogo,
   'Travel Trade': travelTradeLogo,
@@ -71,6 +73,7 @@ export const ExperiencePage: React.FC = () => {
 
   const techGroups = [
     { label: 'All', key: 'All' },
+    { label: 'AI & Multi-Agent', keywords: ['langchain', 'langgraph', 'python', 'rag', 'mcp', 'agent', 'fastapi', 'openai', 'lcel'] },
     { label: 'React / Frontend', keywords: ['react', 'tailwind', 'ui/ux', 'frontend'] },
     { label: 'Node / Backend', keywords: ['node', 'express', 'rest api', 'jwt', 'backend', 'b2b'] },
     { label: 'Database & Cache', keywords: ['mongodb', 'redis', 'firebase', 'schema'] },

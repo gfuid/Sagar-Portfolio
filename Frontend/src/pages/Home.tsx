@@ -5,9 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GsapTextSlide } from '../components/GsapTextSlide';
 
 gsap.registerPlugin(ScrollTrigger);
-import jacketImg from '../assets/jacket.png';
-import headphonesImg from '../assets/headphones.png';
-import bottleImg from '../assets/bottle.png';
+import triremeBannerImg from '../assets/bannerimg/trireme.png';
+import vedagroupBannerImg from '../assets/bannerimg/vedagroup.png';
 import { 
   Mail, 
   CheckCircle2, 
@@ -109,12 +108,12 @@ const MultilingualGreeting: React.FC = () => {
 
 // ── Cycling Status Pill Badge ──────────────────────────────────────────────
 const BADGE_ITEMS = [
-  { role: "Full Stack & Automation Developer", tag: "Sagar Punia",       tagColor: "#e4e4e7" },
+  { role: "Multi-Agent AI & Full Stack Dev",   tag: "Sagar Punia",       tagColor: "#e4e4e7" },
+  { role: "Autonomous AI Research Engine",     tag: "LangGraph + LCEL",  tagColor: "#818cf8" },
   { role: "Lead Developer & Architect",         tag: "Production Ready",  tagColor: "#ef4444" },
   { role: "15+ Production Websites Built",      tag: "1.5+ Yrs Exp",      tagColor: "#fb923c" },
   { role: "10+ n8n Workflows Active",           tag: "Zero API Cost",     tagColor: "#34d399" },
-  { role: "BCA Computer Applications",         tag: "Kurukshetra Uni",   tagColor: "#60a5fa" },
-  { role: "Available for Freelance & Lead",    tag: "Open for Hire",     tagColor: "#4ade80" },
+  { role: "Available for AI & Full-Stack Roles",tag: "Open for Hire",     tagColor: "#4ade80" },
 ];
 
 const CyclingStatusBadge: React.FC = () => {
@@ -587,12 +586,34 @@ export const Home = () => {
   const cardsData = [
     {
       id: 1,
+      className: 'bg-zinc-950/90 text-white border-indigo-500/40 shadow-xl shadow-indigo-500/10',
+      content: (
+        <div className="p-5 h-full flex flex-col justify-between select-none font-sans">
+          <div className="flex justify-between items-center text-[10px] text-indigo-400 font-mono tracking-wider">
+            <span>AI AGENT SYSTEM</span>
+            <span>01 / 05</span>
+          </div>
+          <div className="my-auto space-y-1">
+            <span className="text-[9px] text-indigo-400 font-mono uppercase font-bold block">4-Stage Autonomous Pipeline</span>
+            <h4 className="text-xl font-display font-extrabold tracking-tight uppercase text-white">Multi-Agent AI</h4>
+            <p className="text-[10px] text-zinc-400 line-clamp-2">
+              LangGraph + Tavily search, BeautifulSoup scraper, LCEL writer & Critic QA rubric grader.
+            </p>
+          </div>
+          <div className="text-[9px] text-indigo-300/80 font-mono uppercase tracking-widest">
+            LangGraph + FastAPI SSE + React
+          </div>
+        </div>
+      )
+    },
+    {
+      id: 2,
       className: 'bg-zinc-950/90 text-white border-zinc-800 shadow-xl',
       content: (
         <div className="p-5 h-full flex flex-col justify-between select-none font-sans">
           <div className="flex justify-between items-center text-[10px] text-orange-400 font-mono tracking-wider">
             <span>SAAS PLATFORM</span>
-            <span>01 / 05</span>
+            <span>02 / 05</span>
           </div>
           <div className="my-auto space-y-1">
             <span className="text-[9px] text-emerald-400 font-mono uppercase font-bold block">150+ Gyms | 7,500+ Members</span>
@@ -608,15 +629,15 @@ export const Home = () => {
       )
     },
     {
-      id: 2,
+      id: 3,
       className: 'bg-stone-900/90 text-stone-100 border-stone-800 shadow-xl',
       content: (
         <div className="relative w-full h-full rounded-2xl overflow-hidden text-stone-100 select-none">
-          <img src={jacketImg} className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" alt="" />
+          <img src={triremeBannerImg} className="absolute inset-0 w-full h-full object-cover opacity-35" alt="TRIREME B2B Platform" />
           <div className="absolute inset-0 p-5 flex flex-col justify-between z-10 bg-gradient-to-b from-zinc-950/90 via-zinc-950/85 to-zinc-900/95">
             <div className="flex justify-between items-center text-[10px] text-amber-400 font-mono tracking-wider">
               <span>B2B MARKETPLACE</span>
-              <span>02 / 05</span>
+              <span>03 / 05</span>
             </div>
             <div className="my-auto space-y-1">
               <span className="text-[9px] text-amber-400 uppercase font-mono block font-bold">Multi-Vendor Pharma</span>
@@ -627,31 +648,6 @@ export const Home = () => {
             </div>
             <div className="text-[9px] text-zinc-400 font-mono uppercase tracking-wider">
               Pharma Distributor Network
-            </div>
-          </div>
-        </div>
-      )
-    },
-    {
-      id: 3,
-      className: 'bg-zinc-950/90 text-white border-zinc-800 shadow-xl',
-      content: (
-        <div className="relative w-full h-full rounded-2xl overflow-hidden text-white select-none">
-          <img src={headphonesImg} className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" alt="" />
-          <div className="absolute inset-0 p-5 flex flex-col justify-between z-10 bg-gradient-to-b from-zinc-950/90 to-zinc-900/95">
-            <div className="flex justify-between items-center text-[10px] text-orange-400 font-mono tracking-wider">
-              <span>MOBILE APPS</span>
-              <span>03 / 05</span>
-            </div>
-            <div className="my-auto space-y-1">
-              <span className="text-[9px] text-orange-400 uppercase font-mono block font-bold">React Native (3 Apps)</span>
-              <h4 className="text-xl font-display font-extrabold uppercase text-white">Mobile Suite</h4>
-              <p className="text-[10px] text-zinc-400 line-clamp-2">
-                Gym Owner App + Expense Tracker + Worldwide Weather Checker App.
-              </p>
-            </div>
-            <div className="text-[9px] text-zinc-400 font-mono uppercase tracking-wider">
-              Cross-Platform Mobile Dev
             </div>
           </div>
         </div>
@@ -684,7 +680,7 @@ export const Home = () => {
       className: 'bg-zinc-900/90 text-white border-zinc-700 shadow-xl',
       content: (
         <div className="relative w-full h-full rounded-2xl overflow-hidden text-white select-none">
-          <img src={bottleImg} className="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" alt="" />
+          <img src={vedagroupBannerImg} className="absolute inset-0 w-full h-full object-cover opacity-35" alt="Veda Group & Client Sites" />
           <div className="absolute inset-0 p-5 flex flex-col justify-between z-10 bg-gradient-to-b from-zinc-950/95 to-zinc-900/98">
             <div className="flex justify-between items-center text-[10px] text-emerald-400 font-mono tracking-wider">
               <span>CLIENT SITES</span>
@@ -694,7 +690,7 @@ export const Home = () => {
               <span className="text-[9px] text-emerald-400 uppercase font-mono block font-bold">15+ Production Sites</span>
               <h4 className="text-xl font-display font-extrabold uppercase text-white">Client Portfolio</h4>
               <p className="text-[10px] text-zinc-400 line-clamp-2">
-                Vedomin, Holistic Jeevandhara, VedAgro, Design Houzz & 10+ live sites.
+                Visawebs, Vedomin, Holistic Jeevandhara, Design Houzz & 10+ live sites.
               </p>
             </div>
             <div className="text-[9px] text-zinc-400 font-mono uppercase tracking-wider">

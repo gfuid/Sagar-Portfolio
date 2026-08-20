@@ -7,6 +7,7 @@ export interface WebProject {
   metrics?: { label: string; value: string }[];
   tech: string[];
   liveUrl?: string;
+  githubUrl?: string;
   featured?: boolean;
 }
 
@@ -63,7 +64,7 @@ export interface CertificationItem {
 
 export const personalInfo = {
   name: "Sagar Punia",
-  roleTitle: "Digital Growth Engineer | Full Stack Developer | Automation Developer",
+  roleTitle: "AI Systems Engineer | Full Stack Developer | Automation Architect",
   location: "Panipat, Haryana, India",
   phone: "+91-8307967782",
   email: "sagarpunia163@gmail.com",
@@ -71,27 +72,41 @@ export const personalInfo = {
   linkedinDisplay: "linkedin.com/in/sagar-punia",
   github: "https://github.com/gfuid",
   githubDisplay: "github.com/gfuid",
-  about: "BCA student with 1.5+ years of real-world experience across web development, mobile apps, automation, and digital marketing. Built and deployed 15+ production websites, 3 mobile apps, and 10+ n8n automation workflows. Lead Developer at Binary Boss. Passionate about taking businesses from zero to online — handling everything from code to content.",
+  about: "BCA student with 1.5+ years of real-world experience across multi-agent AI systems, full-stack web applications, mobile apps, and enterprise automation. Built autonomous multi-agent pipelines with LangGraph & LangChain, 15+ production websites, 3 mobile apps, and 10+ n8n workflows. Lead Developer at Binary Boss.",
   summaryStats: [
     { value: "1.5+", label: "Years Experience" },
+    { value: "4-Stage", label: "Multi-Agent AI Engine" },
     { value: "15+", label: "Production Websites" },
     { value: "3", label: "Mobile Apps Built" },
-    { value: "10+", label: "n8n Automation Workflows" },
-    { value: "150+", label: "Gyms Powered on SaaS" },
-    { value: "5-6L", label: "Organic Reach" }
+    { value: "10+", label: "n8n Workflows Active" },
+    { value: "150+", label: "Gyms Powered on SaaS" }
   ],
   skills: {
+    aiAndAgents: ["LangChain", "LangGraph", "Python", "RAG (Retrieval-Augmented Gen)", "MCP (Model Context Protocol)", "Multi-Agent Systems", "FastAPI (SSE)", "OpenAI & Groq API", "Tavily Search API", "LCEL Pipelines", "Prompt Engineering"],
     frontend: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "HTML5/CSS3", "JavaScript (ES6+)"],
-    backend: ["Node.js", "Express.js", "REST APIs", "Redis Caching", "JWT Auth", "Role-Based Access"],
+    backend: ["Node.js", "Express.js", "Python", "FastAPI", "REST APIs", "Redis Caching", "JWT Auth", "Role-Based Access"],
     database: ["MongoDB", "Firebase", "Schema Optimization"],
     mobile: ["React Native", "Mobile UI/UX"],
     automation: ["n8n Workflows", "WebJS WhatsApp Bot", "Python Scraping", "BeautifulSoup", "Selenium", "CRM Sync"],
     marketingAndDesign: ["SEO Optimization", "Google Ads", "IndiaMART / B2B Portals", "Canva", "CapCut", "Filmora", "VN Editor"],
-    devopsAndTools: ["Git & GitHub", "CI/CD Deployment", "Postman", "Linux", "VS Code"]
+    devopsAndTools: ["Git & GitHub", "Docker", "CI/CD Deployment", "Postman", "Linux", "VS Code"]
   }
 };
 
 export const experiences: ExperienceItem[] = [
+  {
+    role: "Full Stack & Web Developer",
+    company: "Visawebs",
+    location: "Panipat / Ireland (Remote)",
+    period: "2026 – Present",
+    type: "Full-Time",
+    bullets: [
+      "Developing and maintaining international education abroad, work permit & Irish immigration portals for global students and professionals.",
+      "Building responsive lead capture intake workflows, university search portals, and CRM automation pipelines connecting 500+ university partners.",
+      "Optimizing web performance, SEO engine structure, and automated consultation booking systems."
+    ],
+    skills: ["React.js", "Node.js", "Python", "Automation", "SEO Engine", "CRM Sync"]
+  },
   {
     role: "Full Stack Developer",
     company: "Trireme Life Science",
@@ -147,6 +162,29 @@ export const experiences: ExperienceItem[] = [
 
 export const webProjects: WebProject[] = [
   {
+    title: "Autonomous Multi-Agent AI Research System",
+    category: "AI & Multi-Agent Systems",
+    badge: "Flagship AI Project",
+    tagline: "4-step collaborative research engine combining autonomous ReAct agents, deep web scraping, and rubric-based QA evaluation.",
+    highlights: [
+      "Step 1 Search Agent: Discovers recent, authoritative web sources using Tavily Search API with dynamic query decomposition.",
+      "Step 2 Reader Agent: Autonomously selects optimal sources and deep-scrapes high-density article content via BeautifulSoup.",
+      "Step 3 Writer Pipeline: Deterministic LCEL / Runnable chain synthesizes findings into structured, cited executive reports.",
+      "Step 4 Critic Pipeline: Automated rubric grading evaluating report completeness, factuality, depth, and revision feedback.",
+      "Full-stack architecture with FastAPI backend (SSE streaming) and React + Vite glassmorphic studio interface."
+    ],
+    metrics: [
+      { label: "Architecture", value: "4-Agent Pipeline" },
+      { label: "Evaluation", value: "Critic QA Rubric" },
+      { label: "Data Sourcing", value: "Tavily + Scraper" },
+      { label: "Streaming", value: "FastAPI SSE" }
+    ],
+    tech: ["Python", "LangChain", "LangGraph", "FastAPI", "React.js", "OpenAI / Groq", "Tavily API", "BeautifulSoup", "LCEL"],
+    liveUrl: "https://lnkd.in/gN4fw5gm",
+    githubUrl: "https://lnkd.in/gzAHtRCH",
+    featured: true
+  },
+  {
     title: "GymFlow — SaaS Gym Management Platform",
     category: "SaaS & Web App",
     badge: "2 Live Deployments",
@@ -182,38 +220,21 @@ export const webProjects: WebProject[] = [
     ],
     tech: ["React.js", "Node.js", "Express", "MongoDB", "JWT Auth", "Tailwind CSS"],
     featured: true
-  },
-  {
-    title: "Full-Stack E-Commerce Platform & Admin Panel",
-    category: "Full Stack Web App",
-    badge: "Production Ready",
-    tagline: "Complete multi-role e-commerce ecosystem with custom payment integration & secure customer dashboard.",
-    highlights: [
-      "End-to-end user-facing store with product filtering, shopping cart, and secure checkout flow.",
-      "Comprehensive Admin Panel for product inventory management, order tracking, and sales reporting.",
-      "Security features: Authentication (login/signup), OTP-based Forgot Password recovery, and granular RBAC."
-    ],
-    metrics: [
-      { label: "Features", value: "Auth + OTP + Admin" },
-      { label: "Payments", value: "Gateway Integrated" }
-    ],
-    tech: ["React.js", "Node.js", "REST APIs", "Payment Gateway", "Firebase / Mongo"],
-    featured: true
   }
 ];
 
 export const clientWebsites: ClientWebsite[] = [
-  { name: "Veda Group", type: "Corporate / Business Group Portal", tech: "React + Tailwind", liveUrl: "https://vedagroup.co.in/" },
-  { name: "Vedomin Life Sciences", type: "Pharma Business Website", tech: "React + Tailwind" },
-  { name: "Holistic Jeevandhara Foundation", type: "NGO / Foundation Portal", tech: "React.js" },
-  { name: "VedAgro Group", type: "Fuel Import/Export Portal", tech: "React + Node" },
-  { name: "Supplix", type: "Business Solutions Platform", tech: "React.js" },
-  { name: "Agil Exports", type: "Global Export Business", tech: "Web Dev & UI" },
-  { name: "Saksham Apple Veda", type: "Ayurvedic Business Site", tech: "React + Tailwind" },
-  { name: "Asia Pacific Pharma", type: "Pharma B2B Platform", tech: "Full Stack" },
-  { name: "Digital PharmaPreneur", type: "Digital Learning Platform", tech: "React.js" },
-  { name: "Design Houzz", type: "Interior Design Showcase", tech: "Next.js + TypeScript" },
-  { name: "Vandana Handloom", type: "SEO-Optimized Production Site", tech: "React + SEO Engine" }
+  { name: "Veda Group", type: "Corporate / Business Group Portal", tech: "React + Tailwind", liveUrl: "https://www.vedagroup.co.in/" },
+  { name: "Vedomin Life Sciences", type: "Pharma Business Website", tech: "React + Tailwind", liveUrl: "https://vedominelifesciences.com/" },
+  { name: "Trireme Group", type: "Pharma B2B Platform", tech: "Full Stack", liveUrl: "https://triremegroup.in/" },
+  { name: "Holistic Jeevandhara Foundation", type: "NGO / Foundation Portal", tech: "React.js", liveUrl: "https://holisticjeevandharafoundation.in/" },
+  { name: "Saksham Apple Veda", type: "Ayurvedic Business Site", tech: "React + Tailwind", liveUrl: "https://sakshamappleveda.com/" },
+  { name: "Digital PharmaPreneur", type: "Digital Learning Platform", tech: "React.js", liveUrl: "https://digitalpharmapreneur.com/" },
+  { name: "Design Houzz", type: "Interior Design Showcase", tech: "Next.js + TypeScript", liveUrl: "https://designhouzz23.com/" },
+  { name: "Travel Trade", type: "Media & Growth Platform", tech: "Web & Growth", liveUrl: "https://travel-trade.co.in/" },
+  { name: "InnovationSoch", type: "Full Stack Startup", tech: "React + Node + Python", liveUrl: "https://innovationsoch.com/" },
+  { name: "Agil Exports", type: "Global Export Business", tech: "Web Dev & UI", liveUrl: "https://agileexports.com/" },
+  { name: "Supplix", type: "Business Solutions Platform", tech: "React.js" }
 ];
 
 export const mobileApps: MobileApp[] = [

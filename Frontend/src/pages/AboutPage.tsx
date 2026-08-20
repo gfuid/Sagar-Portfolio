@@ -30,7 +30,8 @@ import {
   ChevronRight,
   Grid,
   Bookmark,
-  Pin
+  Pin,
+  Bot
 } from 'lucide-react';
 import { personalInfo, education, certifications } from '../data/portfolioData';
 import { Moon3D } from '../components/Moon3D';
@@ -613,6 +614,24 @@ export const AboutPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
+            <div className="p-5 rounded-2xl bg-zinc-950 border border-indigo-500/30 shadow-lg shadow-indigo-500/5 space-y-3 md:col-span-2 lg:col-span-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-white font-heading font-bold text-sm flex items-center gap-2 text-indigo-400">
+                  <Bot className="w-4 h-4" /> Generative AI, Multi-Agent & RAG / MCP Architecture
+                </h4>
+                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-bold">
+                  Core AI Stack
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {personalInfo.skills.aiAndAgents.map((s) => (
+                  <span key={s} className="px-3 py-1 rounded-lg bg-indigo-950/40 border border-indigo-500/30 text-xs text-indigo-200 font-mono font-semibold">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             <div className="p-5 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-3">
               <h4 className="text-white font-heading font-bold text-sm flex items-center gap-2 text-red-400">
                 <Code2 className="w-4 h-4" /> Frontend Development

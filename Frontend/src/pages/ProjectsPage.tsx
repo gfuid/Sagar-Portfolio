@@ -8,14 +8,25 @@ import {
   Layers,
   Monitor,
   Code2,
-  Cpu
+  Cpu,
+  Bot
 } from 'lucide-react';
 import { clientWebsites } from '../data/portfolioData';
 import { ScrollReveal } from '../components/ScrollReveal';
 
+// Import project-specific banner mockups from src/assets/bannerimg/
+import multiagentBannerImg from '../assets/bannerimg/multiagent.png';
+import triremeBannerImg from '../assets/bannerimg/trireme.png';
+import vedagroupBannerImg from '../assets/bannerimg/vedagroup.png';
+import vedominBannerImg from '../assets/bannerimg/vedomin.png';
+import holisticBannerImg from '../assets/bannerimg/holistic.png';
+import sakshamBannerImg from '../assets/bannerimg/saksham.png';
+import designbuzzBannerImg from '../assets/bannerimg/desinbuzz.png';
+import digitalpharmaBannerImg from '../assets/bannerimg/digitalpharma.png';
+
 interface ShowcaseProject {
   index: string;
-  categoryKey: 'Frontend Projects' | 'Full Stack & SaaS' | 'Mobile Apps' | 'Automation & n8n' | 'Client Websites';
+  categoryKey: 'AI & Multi-Agent' | 'Frontend Projects' | 'Full Stack & SaaS' | 'Mobile Apps' | 'Automation & n8n' | 'Client Websites';
   title: string;
   role: string;
   roleColor: string;
@@ -25,6 +36,7 @@ interface ShowcaseProject {
   desktopImg: string;
   mobileImg: string;
   liveUrl?: string;
+  githubUrl?: string;
 }
 
 export const ProjectsPage: React.FC = () => {
@@ -33,8 +45,9 @@ export const ProjectsPage: React.FC = () => {
 
   const categories = [
     { label: 'All', icon: Layers },
-    { label: 'Frontend Projects', icon: Code2 },
+    { label: 'AI & Multi-Agent', icon: Bot },
     { label: 'Full Stack & SaaS', icon: Sparkles },
+    { label: 'Frontend Projects', icon: Code2 },
     { label: 'Mobile Apps', icon: Smartphone },
     { label: 'Automation & n8n', icon: Cpu },
     { label: 'Client Websites', icon: Globe },
@@ -42,9 +55,26 @@ export const ProjectsPage: React.FC = () => {
 
   // Comprehensive Showcase Projects populated with all Frontend Client sites
   const showcaseProjects: ShowcaseProject[] = [
+    // --- AI & MULTI-AGENT SYSTEMS ---
+    {
+      index: '<01>',
+      categoryKey: 'AI & Multi-Agent',
+      title: 'Autonomous Multi-Agent AI Research System',
+      role: 'AI Systems Architect & Full Stack Dev',
+      roleColor: 'text-indigo-400',
+      frontendStack: 'React.js, Vite, Tailwind CSS, FastAPI SSE Stream, Multi-Agent Topology UI',
+      backendStack: 'Python, LangChain, LangGraph, FastAPI, Tavily Search API, BeautifulSoup, LCEL Runnables',
+      description:
+        'Decomposed complex technical research into a 4-step autonomous pipeline: 1) Search Agent discovers real-time credible sources via Tavily, 2) Reader Agent executes deep web scraping via BeautifulSoup, 3) Writer Pipeline synthesizes findings into structured executive reports with LCEL, and 4) Critic QA Chain delivers automated rubric evaluation & scoring.',
+      desktopImg: multiagentBannerImg,
+      mobileImg: multiagentBannerImg,
+      liveUrl: 'https://lnkd.in/gN4fw5gm',
+      githubUrl: 'https://lnkd.in/gzAHtRCH',
+    },
+
     // --- FULL STACK & SAAS ---
     {
-      index: '<1>',
+      index: '<02>',
       categoryKey: 'Full Stack & SaaS',
       title: 'GymFlow — SaaS Gym Management Platform',
       role: 'Full Stack Developer',
@@ -57,7 +87,7 @@ export const ProjectsPage: React.FC = () => {
       mobileImg: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80',
     },
     {
-      index: '<2>',
+      index: '<03>',
       categoryKey: 'Full Stack & SaaS',
       title: 'TRIREME — Multi-Vendor B2B Pharma Marketplace',
       role: 'Lead Architect & Full Stack Dev',
@@ -66,26 +96,14 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'Node.js, Express, MongoDB, JWT Authentication, GST & Drug License Validator',
       description:
         'Engineered a scalable B2B marketplace for pharmaceutical distributors enabling multi-tier vendors to launch digital storefronts with automated compliance onboarding (GST & Drug License validation). Built robust role-based access control (RBAC) and vendor approval workflows.',
-      desktopImg: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      index: '<3>',
-      categoryKey: 'Full Stack & SaaS',
-      title: 'Full-Stack E-Commerce Platform & Admin Panel',
-      role: 'Full Stack Lead',
-      roleColor: 'text-orange-400',
-      frontendStack: 'React.js, Tailwind CSS, Redux Toolkit',
-      backendStack: 'Node.js, Express, MongoDB, Payment Gateway, OTP Auth',
-      description:
-        'Complete multi-role e-commerce ecosystem featuring customer store with product filters, shopping cart, payment checkout, OTP-based password recovery, and comprehensive Admin Panel for inventory, order tracking, and revenue analytics.',
-      desktopImg: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80',
+      desktopImg: triremeBannerImg,
+      mobileImg: triremeBannerImg,
+      liveUrl: 'https://triremegroup.in/',
     },
 
     // --- FRONTEND PROJECTS (INCLUDES ALL CLIENT WEBSITES) ---
     {
-      index: '<4>',
+      index: '<04>',
       categoryKey: 'Frontend Projects',
       title: 'Veda Group — Corporate Business Group Web Platform',
       role: 'Frontend Architect',
@@ -94,12 +112,12 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'Vite Production Build, SEO Engine, Mobile Responsive',
       description:
         'Engineered the official corporate web platform for Veda Group (vedagroup.co.in) featuring responsive company showcase, business verticals, strategic initiatives, and lead inquiry routing.',
-      desktopImg: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-      liveUrl: 'https://vedagroup.co.in/',
+      desktopImg: vedagroupBannerImg,
+      mobileImg: vedagroupBannerImg,
+      liveUrl: 'https://www.vedagroup.co.in/',
     },
     {
-      index: '<5>',
+      index: '<05>',
       categoryKey: 'Frontend Projects',
       title: 'Vedomin Life Sciences — Pharma Web Application',
       role: 'Frontend Web Developer',
@@ -108,11 +126,12 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'Vite Build, REST APIs Integration',
       description:
         'Designed and deployed a responsive pharmaceutical web application for Vedomin Life Sciences featuring interactive product catalogs, fast load times, and custom inquiry web forms.',
-      desktopImg: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+      desktopImg: vedominBannerImg,
+      mobileImg: vedominBannerImg,
+      liveUrl: 'https://vedominelifesciences.com/',
     },
     {
-      index: '<5>',
+      index: '<06>',
       categoryKey: 'Frontend Projects',
       title: 'Holistic Jeevandhara Foundation — NGO Web Portal',
       role: 'Frontend Developer',
@@ -121,24 +140,12 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'REST API, Webhook Donation Form Integration',
       description:
         'Built an impactful web portal for Holistic Jeevandhara Foundation with donation workflows, program showcases, volunteer registration forms, and social media integration.',
-      desktopImg: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb0?auto=format&fit=crop&w=600&q=80',
+      desktopImg: holisticBannerImg,
+      mobileImg: holisticBannerImg,
+      liveUrl: 'https://holisticjeevandharafoundation.in/',
     },
     {
-      index: '<6>',
-      categoryKey: 'Frontend Projects',
-      title: 'VedAgro Group — Fuel Import/Export Web Platform',
-      role: 'Frontend Engineer',
-      roleColor: 'text-amber-400',
-      frontendStack: 'React.js, Tailwind CSS, Lucide React',
-      backendStack: 'Node.js API, International Currency & Commodity Ticker',
-      description:
-        'Engineered an export/import B2B portal for VedAgro Group featuring global commodity listings, shipping calculator UI, and lead inquiry routing.',
-      desktopImg: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      index: '<7>',
+      index: '<07>',
       categoryKey: 'Frontend Projects',
       title: 'Saksham Apple Veda — Ayurvedic Business Web App',
       role: 'UI/UX & Frontend Dev',
@@ -147,24 +154,26 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'Vite Static Hosting, SEO Meta Engine',
       description:
         'Crafted an e-commerce-style showcase web app for Saksham Apple Veda highlighting organic Ayurvedic products with smooth product sliders and WhatsApp inquiry routing.',
-      desktopImg: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+      desktopImg: sakshamBannerImg,
+      mobileImg: sakshamBannerImg,
+      liveUrl: 'https://sakshamappleveda.com/',
     },
     {
-      index: '<8>',
+      index: '<08>',
       categoryKey: 'Frontend Projects',
-      title: 'Design Houzz — Modern Interior Design Showcase',
+      title: 'Design Houzz / DesignBuzz — Modern Interior Showcase',
       role: 'Frontend Architect',
       roleColor: 'text-indigo-400',
       frontendStack: 'Next.js 14, TypeScript, Tailwind CSS, Lucide Icons',
       backendStack: 'Vite Build, SEO Image Optimization Engine',
       description:
         'Crafted a modern interior design showcase web portal featuring interactive gallery views, smooth micro-animations, fast image lazy loading, and contact inquiry integration.',
-      desktopImg: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80',
+      desktopImg: designbuzzBannerImg,
+      mobileImg: designbuzzBannerImg,
+      liveUrl: 'https://designhouzz23.com/',
     },
     {
-      index: '<9>',
+      index: '<09>',
       categoryKey: 'Frontend Projects',
       title: 'Movie Matching AI Recommendation App',
       role: 'Frontend Architect',
@@ -186,26 +195,14 @@ export const ProjectsPage: React.FC = () => {
       backendStack: 'REST API, Course Analytics Engine',
       description:
         'Developed an interactive digital learning platform for pharma professionals featuring video module player, downloadable resources, and enrollment tracking.',
-      desktopImg: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-    },
-    {
-      index: '<11>',
-      categoryKey: 'Frontend Projects',
-      title: 'Vandana Handloom — Production Web Store',
-      role: 'Frontend Lead & SEO Specialist',
-      roleColor: 'text-emerald-400',
-      frontendStack: 'React.js, Tailwind CSS, Schema Markup',
-      backendStack: 'REST API, Custom SEO Engine',
-      description:
-        'Built a fast, SEO-optimized production e-commerce web portal for Vandana Handloom with localized keyword ranking and high-resolution product showcases.',
-      desktopImg: 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=1200&q=80',
-      mobileImg: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80',
+      desktopImg: digitalpharmaBannerImg,
+      mobileImg: digitalpharmaBannerImg,
+      liveUrl: 'https://digitalpharmapreneur.com/',
     },
 
     // --- MOBILE APPS ---
     {
-      index: '<12>',
+      index: '<11>',
       categoryKey: 'Mobile Apps',
       title: 'Gym Management React Native Mobile App',
       role: 'Mobile App Developer',
@@ -218,7 +215,7 @@ export const ProjectsPage: React.FC = () => {
       mobileImg: 'https://images.unsplash.com/photo-1510519138161-58441d829316?auto=format&fit=crop&w=600&q=80',
     },
     {
-      index: '<13>',
+      index: '<12>',
       categoryKey: 'Mobile Apps',
       title: 'Expense Tracker & Budget Mobile App',
       role: 'Mobile Developer',
@@ -233,7 +230,7 @@ export const ProjectsPage: React.FC = () => {
 
     // --- AUTOMATION & N8N ---
     {
-      index: '<14>',
+      index: '<13>',
       categoryKey: 'Automation & n8n',
       title: 'n8n WhatsApp WebJS Bot & Lead Automation',
       role: 'Automation Engineer',
@@ -371,18 +368,33 @@ export const ProjectsPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Optional Live URL Button */}
-                {project.liveUrl && (
-                  <div className="pt-2">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white font-mono text-xs font-bold hover:scale-105 transition shadow-lg shadow-red-500/25 cursor-pointer"
-                    >
-                      <span>Visit Live Website</span>
-                      <span className="text-sm">↗</span>
-                    </a>
+                {/* Action Buttons: Live URL & GitHub */}
+                {(project.liveUrl || project.githubUrl) && (
+                  <div className="pt-2 flex flex-wrap items-center gap-3">
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white font-mono text-xs font-bold hover:scale-105 transition shadow-lg shadow-red-500/25 cursor-pointer"
+                      >
+                        <span>Live Demo</span>
+                        <span className="text-sm">↗</span>
+                      </a>
+                    )}
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 border border-zinc-700/80 text-zinc-200 hover:text-white hover:border-zinc-500 font-mono text-xs font-bold hover:scale-105 transition shadow-lg cursor-pointer"
+                      >
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                        <span>Source Code</span>
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
